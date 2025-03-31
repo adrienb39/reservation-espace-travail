@@ -1,0 +1,28 @@
+{
+  "name": "reservation-espace-travail",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/adrienb39/reservation-espace-travail#readme",
+  "bugs": {
+    "url": "https://github.com/adrienb39/reservation-espace-travail/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrienb39/reservation-espace-travail.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^35.1.2"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
+    "mysql2": "^3.14.0"
+  }
+}
