@@ -18,3 +18,19 @@ const dbConfig = {
     waitForConnections: true,
     queueLimit: 0
 }
+
+// Créer le pool de connexion
+const pool = mysql.createPool(dbConfig)
+
+// Tester la connexion
+async function testConnexion() {
+    try {
+        // Demander une connexion au pool
+        const connexion = await pool.getConnection()
+        console.log('Connexion avec la base de donnée établie')
+        connexion.release() // On rend la connexion disponible dans le pool
+    } catch(error) {
+        console.error('Erreur de connexion à la base de données')
+    }
+}
+testConnexion()
