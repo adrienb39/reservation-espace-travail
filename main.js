@@ -100,3 +100,13 @@ app.on('window-all-closed', () => {
         app.quit
     }
 })
+
+// Ecouter sur le canal "get-versions"
+ipcMain.handle('get-versions', () => {
+    // Renvoyer un objet contenant les versions des outils
+    return {
+        electron: process.versions.electron,
+        node: process.versions.node,
+        chrome: process.versions.chrome
+    }
+})
