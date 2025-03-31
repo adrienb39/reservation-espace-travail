@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `reservation-espace-travail`
+-- Base de données : `reservation_espace_travail`
 --
-CREATE DATABASE IF NOT EXISTS `reservation-espace-travail` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `reservation-espace-travail`;
+CREATE DATABASE IF NOT EXISTS `reservation_espace_travail` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `reservation_espace_travail`;
 
 -- --------------------------------------------------------
 
