@@ -1,5 +1,7 @@
 // Processus principal
 
+const {app, BrowserWindow, ipcMain, Menu, dialog} = require("electron")
+const path = require('path');
 const mysql = require('mysql2/promise')
 
 require('dotenv').config()
@@ -34,3 +36,67 @@ async function testConnexion() {
     }
 }
 testConnexion()
+
+// Créer la fenêtre principale
+function createWindow() {
+    window = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: false, // Acces aux API Node depuis le processus
+            contextIsolation: true,
+            sandbox: true,
+            preload: path.join(__dirname, 'src/js/preload.js')
+        }
+    })
+    // window.webContents.openDevTools()
+    // Création du menu
+    createMenu()
+    window.loadFile('src/pages/index.html');
+}
+
+// Fonction permettant de créer un menu personnalisé
+function createMenu() {
+    // Créer un tableau qui va représenter le menu => modèle
+    const template = [
+        {
+            label: 'App',
+            submenu: [
+                {
+                    label: 'Versions',
+                    click: () => window.loadFile('src/pages/index.html')
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label: 'Quitter',
+                    accelerator: process.platform === "darwin" ? 'Cmd+Q' : 'Ctrl+Q',
+                    click: () => app.quit()
+                }
+            ]
+        }
+    ]
+    // Créer le menu à partir du modèle
+    const menu = Menu.buildFromTemplate(template)
+    // Définir le menu comme étant le menu de l'application
+    Menu.setApplicationMenu(menu)
+}
+
+// Attendre l'initialisation de l'application au démarrage
+app.whenReady().then(() => {
+    console.log('Application initialisée')
+    createWindow()
+
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow()
+        }
+    })
+})
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit
+    }
+})
