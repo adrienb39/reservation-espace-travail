@@ -64,7 +64,7 @@ function createMenu() {
             submenu: [
                 {
                     label: 'Versions',
-                    click: () => window.loadFile('src/pages/index.html')
+                    click: () => window.loadFile('src/pages/version.html')
                 },
                 {
                     type: 'separator'
