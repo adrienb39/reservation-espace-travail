@@ -79,6 +79,15 @@ function createMenu() {
                     click: () => app.quit()
                 }
             ]
+        },
+        {
+            label: 'Utilisateur',
+            submenu: [
+                {
+                    label: 'Inscription',
+                    click: () => window.loadFile('src/pages/inscription.html')
+                }
+            ]
         }
     ]
     // Créer le menu à partir du modèle
