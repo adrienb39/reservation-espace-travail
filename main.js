@@ -63,6 +63,10 @@ function createMenu() {
             label: 'App',
             submenu: [
                 {
+                    label: 'Accueil',
+                    click: () => window.loadFile('src/pages/index.html')
+                },
+                {
                     label: 'Versions',
                     click: () => window.loadFile('src/pages/version.html')
                 },
