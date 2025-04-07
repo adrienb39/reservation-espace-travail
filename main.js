@@ -49,7 +49,7 @@ function createWindow() {
             preload: path.join(__dirname, 'src/js/preload.js')
         }
     })
-    // window.webContents.openDevTools()
+    window.webContents.openDevTools()
     // Création du menu
     createMenu()
     window.loadFile('src/pages/index.html');
@@ -121,5 +121,27 @@ ipcMain.handle('get-versions', () => {
         electron: process.versions.electron,
         node: process.versions.node,
         chrome: process.versions.chrome
+    }
+})
+
+async function inscription(nom) {
+    try {
+        console.log('Inscription:' + nom)
+        const [result] = await pool.query('INSERT INTO utilisateurs (prenom_utilisateur, nom_utilisateur, email_utilisateur, mdp_utilisateur, created_at) VALUES (?, ?, ?, ?, now())', ['a', nom, 'a', 'a'])
+        console.log('Inscription avec l\'ID:' + result.insertId)
+        return
+    } catch (error) {
+        console.error('Erreur lors de l\'inscription', error)
+        throw error;
+    }
+}
+
+ipcMain.handle('user:addUser', async (event, nom) => {
+    try {
+        await inscription(nom)
+        return true
+    } catch(error) {
+        dialog.showErrorBox('Erreur technique', 'Impossible d\'ajouter un utilisateur')
+        return [];
     }
 })
