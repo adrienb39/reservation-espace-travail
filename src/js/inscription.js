@@ -3,15 +3,15 @@
 let formSignup = document.querySelector('#form-signup')
 
 formSignup.addEventListener("submit", async (e) => {
-    if (!formSignup.checkValidity()) {
-        e.preventDefault()
-    }
+    e.preventDefault()
     let nom = document.querySelector("#nom").value
     let prenom = document.querySelector("#prenom").value
     let email = document.querySelector("#email").value
+    let password = document.querySelector("#password").value
+    let confirmPassword = document.querySelector("#confirmPassword").value
     try {
         formSignup.classList.add('was-validated')
-        if (formSignup.checkValidity() || pattern.test(email)) {
+        if (formSignup.checkValidity()) {
             await user.addUser(nom, prenom, email)
         }
     } catch (error) {
