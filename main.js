@@ -124,10 +124,10 @@ ipcMain.handle('get-versions', () => {
     }
 })
 
-async function inscription(nom) {
+async function inscription(nom, prenom) {
     try {
-        console.log('Inscription:' + nom)
-        const [result] = await pool.query('INSERT INTO utilisateurs (prenom_utilisateur, nom_utilisateur, email_utilisateur, mdp_utilisateur, created_at) VALUES (?, ?, ?, ?, now())', ['a', nom, 'a', 'a'])
+        console.log('Inscription:' + nom, prenom)
+        const [result] = await pool.query('INSERT INTO utilisateurs (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur, created_at) VALUES (?, ?, ?, ?, now())', [nom, prenom, 'a', 'a'])
         console.log('Inscription avec l\'ID:' + result.insertId)
         return
     } catch (error) {
@@ -136,9 +136,9 @@ async function inscription(nom) {
     }
 }
 
-ipcMain.handle('user:addUser', async (event, nom) => {
+ipcMain.handle('user:addUser', async (event, nom, prenom) => {
     try {
-        await inscription(nom)
+        await inscription(nom, prenom)
         return true
     } catch(error) {
         dialog.showErrorBox('Erreur technique', 'Impossible d\'ajouter un utilisateur')
