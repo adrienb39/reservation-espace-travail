@@ -37,9 +37,9 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" required>
                 <div class="invalid-feedback">
-                    Veuillez entrer un mot de passe
+                    Veuillez entrer un mot de passe, le mot de passe doit contenir au moins 8 caractères, au moins une majuscule, au moins une minuscule, au moins un chiffre
                 </div>
             </div>
             <div class="mb-3">
