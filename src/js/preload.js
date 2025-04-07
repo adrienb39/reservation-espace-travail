@@ -5,6 +5,6 @@ contextBridge.exposeInMainWorld('versions', {
     getVersions: () => ipcRenderer.invoke('get-versions')
 })
 
-contextBridge.exposeInMainWorld('inscription', {
-    add: (nom, prenom, email, password) => ipcRenderer.invoke('inscription:add', {nom, prenom, email, password})
+contextBridge.exposeInMainWorld('user', {
+    addUser: (nom) => ipcRenderer.invoke('user:addUser', nom)
 })
