@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <title>Inscription</title>
 </head>
+
 <body>
-    <div class="container">
+    <div class="container mx-auto px-4 flex-grow">
         <h1 class="text-center">Inscription</h1>
-        <form action="" method="post" id="form-signup" novalidate>
+        <form action="" method="post" class="needs-validation" id="form-signup" novalidate>
             <div class="row mb-3">
                 <div class="col-6 mb-3">
                     <label for="nom" class="form-label">Nom</label>
                     <input type="text" class="form-control" id="nom" name="nom" required>
+                    <div class="invalid-feedback">
+                        Veuillez entrer un nom
+                    </div>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="prenom" class="form-label">Prénom</label>
                     <input type="text" class="form-control" id="prenom" name="prenom" required>
+                    <div class="invalid-feedback">
+                        Veuillez entrer un prénom
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email professionnel</label>
-              <input type="email" class="form-control" id="email" name="email" required>
-              <span id="erreur-message-email" class="error-message"></span>
+                <label for="email" class="form-label">Email professionnel</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback">
+                    Veuillez entrer un email valide
+                </div>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Mot de passe</label>
-              <input type="password" class="form-control" id="password" name="password" required>
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <div class="invalid-feedback">
+                    Veuillez entrer un mot de passe
+                </div>
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Mot de passe</label>
                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                <div class="invalid-feedback">
+                    Veuillez confirmer le mot de passe
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">S'inscrire</button>
         </form>
     </div>
     <script src="../js/inscription.js"></script>
 </body>
+
 </html>
