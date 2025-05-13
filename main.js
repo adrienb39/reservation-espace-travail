@@ -143,7 +143,7 @@ async function inscription(nom, prenom, email, password) {
 ipcMain.handle('user:addUser', async (event, nom, prenom, email, password) => {
     try {
         await inscription(nom, prenom, email, password)
-        return true
+        window.loadFile('src/pages/index.html')
     } catch(error) {
         dialog.showErrorBox('Erreur technique', 'Impossible d\'ajouter un utilisateur')
         return [];
