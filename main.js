@@ -3,6 +3,8 @@
 const {app, BrowserWindow, ipcMain, Menu, dialog} = require("electron")
 const path = require('path');
 const mysql = require('mysql2/promise')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 require('dotenv').config()
 
@@ -124,10 +126,12 @@ ipcMain.handle('get-versions', () => {
     }
 })
 
-async function inscription(nom, prenom, email) {
+async function inscription(nom, prenom, email, password) {
     try {
-        console.log('Inscription:' + nom, prenom, email)
-        const [result] = await pool.query('INSERT INTO utilisateurs (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur, created_at) VALUES (?, ?, ?, ?, now())', [nom, prenom, email, 'a'])
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        console.log('Inscription:' + nom, prenom, email, hashedPassword)
+        const [result] = await pool.query('INSERT INTO utilisateurs (nom_utilisateur, prenom_utilisateur, email_utilisateur, mdp_utilisateur, created_at) VALUES (?, ?, ?, ?, now())', [nom, prenom, email, hashedPassword])
         console.log('Inscription avec l\'ID:' + result.insertId)
         return
     } catch (error) {
@@ -136,9 +140,9 @@ async function inscription(nom, prenom, email) {
     }
 }
 
-ipcMain.handle('user:addUser', async (event, nom, prenom, email) => {
+ipcMain.handle('user:addUser', async (event, nom, prenom, email, password) => {
     try {
-        await inscription(nom, prenom, email)
+        await inscription(nom, prenom, email, password)
         return true
     } catch(error) {
         dialog.showErrorBox('Erreur technique', 'Impossible d\'ajouter un utilisateur')

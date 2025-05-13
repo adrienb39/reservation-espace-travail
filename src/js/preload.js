@@ -6,5 +6,5 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 contextBridge.exposeInMainWorld('user', {
-    addUser: (nom, prenom, email) => ipcRenderer.invoke('user:addUser', nom, prenom, email)
+    addUser: (nom, prenom, email, password) => ipcRenderer.invoke('user:addUser', nom, prenom, email, password)
 })
